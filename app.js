@@ -1,24 +1,18 @@
-// Union, menggunakan tanda "|" digunakan untuk membuat fungsi yang mempunyai input berbeda
-// Literal type adalah type seperti string
-function combine(input1, input2, resultConversion) {
-    var result;
-    if ((typeof input1 === "number" && typeof input2 === "number") ||
-        resultConversion === "as-number") {
-        result = +input1 + +input2;
-    }
-    else {
-        result = input1.toString() + "" + input2.toString();
-    }
-    //   if (resultConversion === "as-number") {
-    //     return +result;
-    //   } else {
-    //     result.toString();
-    //   }
-    return result;
+function add(n1, n2) {
+    return n1 + n2;
 }
-var combinedAges = combine(30, 26, "as-number");
-console.log(combinedAges);
-var combineStringAges = combine("30", "26", "as-number");
-console.log(combineStringAges);
-var combineNames = combine("Surya", "Kumara", "as-text");
-console.log(combineNames);
+function printResutl(num) {
+    console.log("result: " + num);
+}
+// kalau kita console.log function yang tidak mereturn apa-apa.
+// Maka akan menghasilkan undefined
+console.log(printResutl(add(5, 12)));
+// function as types
+// below is the use case
+// let combineValues;
+// combineValues = add;
+// combineValues = 5;
+// console.log(combineValues(8, 8));
+var combineValues;
+combineValues = add;
+console.log(combineValues(8, 8));
