@@ -1,18 +1,13 @@
-function add(n1, n2) {
-    return n1 + n2;
+// type unknown kalau ditimpa
+var userInput;
+var userName;
+userInput = 5;
+userInput = "Max";
+if (typeof userInput === "string") {
+    userName = userInput;
 }
-function printResutl(num) {
-    console.log("result: " + num);
+function generateError(message, code) {
+    throw { message: message, errorCode: code };
 }
-// kalau kita console.log function yang tidak mereturn apa-apa.
-// Maka akan menghasilkan undefined
-console.log(printResutl(add(5, 12)));
-// function as types
-// below is the use case
-// let combineValues;
-// combineValues = add;
-// combineValues = 5;
-// console.log(combineValues(8, 8));
-var combineValues;
-combineValues = add;
-console.log(combineValues(8, 8));
+var result = generateError("An error occurred!", 500);
+console.log(result);
