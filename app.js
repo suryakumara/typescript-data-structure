@@ -1,46 +1,32 @@
 "use strict";
-const userName = "Surya";
-// let age = 10;
-// age = 20;
-function add(a, b = 1) {
-    let result;
-    result = a + b;
-    return result;
-}
-// perbedaan let dan variable adalah pada block scope menggunakan if statement
-// ini masih bekerja di javascript
-// if (age > 30) {
-//   var isOld = true;
-// }
-// console.log(isOld);
-// ini error di javascript
-// if (age > 30) {
-//   let isOld = true;
-// }
-// console.log(isOld);
-const printOut = (output) => console.log(output);
-const button = document.querySelector("button");
-if (button) {
-    button.addEventListener("click", (event) => console.log(event));
-}
-printOut(add(5));
-// spread operator
-const hobbies = ["Sports", "Cooking"];
-const activeHobbies = ["Hiking"];
-activeHobbies.push(...hobbies);
-const person = {
-    firstName: "Surya",
-    age: 25,
-};
-const copiedPerson = Object.assign({}, person);
-const substact = (...numbers) => {
-    return numbers.reduce((curResult, curValue) => {
-        return curResult + curValue;
-    }, 0);
-};
-const substractedNumbers = substact(2, 4, 56, 34);
-console.log(substractedNumbers);
-// destructuring
-const [hobby1, hobby2, ...remainingHobbies] = hobbies;
-const { firstName: userNames, age } = person;
-console.log(userName, age);
+var Department = /** @class */ (function () {
+    function Department(name, id) {
+        this.name = name;
+        this.id = id;
+        // field of the class
+        // private id: string;
+        // private name: string;
+        this.employees = [];
+        // this.id = id;
+        // this.name = n;
+    }
+    Department.prototype.describe = function () {
+        console.log("Department: " + this.name + this.id);
+    };
+    Department.prototype.addEmployees = function (employe) {
+        // validation
+        this.employees.push(employe);
+    };
+    Department.prototype.printEmployee = function () {
+        console.log(this.employees.length);
+        console.log(this.employees);
+    };
+    return Department;
+}());
+var accounting = new Department("Accounting", "1");
+accounting.describe();
+// const accountingCopy = { name: "DUMMY", describe: accounting.describe };
+// accountingCopy.describe();
+accounting.addEmployees("Surya");
+accounting.addEmployees("Kumara");
+accounting.printEmployee();
