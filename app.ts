@@ -1,75 +1,52 @@
-class Department {
-  // field of the class
-  // private id: string;
-  // private name: string;
-  protected employees: string[] = [];
-
-  constructor(public name: string, private readonly id: string) {
-    // this.id = id;
-    // this.name = n;
-  }
-
-  describe(this: Department) {
-    console.log(`Department: ` + this.name + this.id);
-  }
-
-  addEmployees(employe: string) {
-    // validation
-    this.employees.push(employe);
-  }
-
-  printEmployee() {
-    console.log(this.employees.length);
-    console.log(this.employees);
-  }
+// type AddFn = (a: number, b: number) => number
+// interface function type
+interface AddFn {
+  (a: number, b: number): number;
 }
 
-const accounting = new Department("Accounting", "1");
-accounting.describe();
+let add: AddFn;
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
 
-// const accountingCopy = { name: "DUMMY", describe: accounting.describe };
-// accountingCopy.describe();
-
-accounting.addEmployees("Surya");
-accounting.addEmployees("Kumara");
-accounting.printEmployee();
-
-// inhiritent
-class ITDepartment extends Department {
-  constructor(id: string, public admins: string[]) {
-    super("IT", id);
-    this.admins = admins;
-  }
+interface Named {
+  readonly name?: string;
+  outputName?: string;
 }
 
-class AccountingDepartment extends Department {
-  constructor(name: string, private reports: string[]) {
-    super(name, "ID");
-    this.reports = reports;
-  }
+interface Greetable extends Named {
+  greet(phrase: string): void;
+}
+class Person implements Greetable {
+  name?: string;
+  age = 30;
 
-  addReports(report: string) {
-    this.reports.push(report);
-  }
-
-  addEmployees(name: string): void {
-    if (name === "Surya") {
-      return;
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
     }
-    this.employees.push(name);
+  }
+
+  greet(phrase: string): void {
+    if (this.name) {
+      console.log(phrase + " " + this.name);
+    } else {
+      console.log("Hi !");
+    }
   }
 }
 
-const it = new ITDepartment("id3", ["Surya"]);
-it.addEmployees("Surya");
-it.addEmployees("Kumara");
-console.log(it);
+let user1: Greetable;
 
-const acc = new AccountingDepartment("Surya", []);
+user1 = new Person("I Made Surya Kumara");
+user1 = new Person();
 
-acc.addReports("Make a task");
-acc.addReports("Make a taskas");
-console.log(acc);
+// user1 = {
+//   name: "I Made Surya Kumara",
+//   greet(phrase: string) {
+//     console.log(phrase + " " + this.name);
+//   },
+// };
 
-// private property can't access to extend class
-//
+user1.greet("Hi there - I am ");
+console.log(user1);
