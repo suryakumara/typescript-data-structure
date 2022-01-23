@@ -1,5 +1,6 @@
 "use strict";
-var e1 = {
+var _a;
+const e1 = {
     name: "Max",
     privileges: ["create-server"],
     startDate: new Date(),
@@ -10,6 +11,18 @@ function tambah(a, b) {
     }
     return a + b;
 }
+const result = tambah("Surya", "Kumara");
+result.split(" ");
+// optional Chaining
+const fetchedUserData = {
+    id: "u1",
+    name: "Max",
+    job: { title: "CEO", description: "My Own Company" },
+};
+console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+const usersInput = "Surya";
+const storedData = usersInput !== null && usersInput !== void 0 ? usersInput : "DEFAULT";
+console.log(storedData);
 function printEmployeeInformation(emp) {
     console.log("Name : " + emp.name);
     if ("privileges" in emp) {
@@ -19,28 +32,22 @@ function printEmployeeInformation(emp) {
         console.log("Privileges : " + emp.startDate);
     }
 }
-printEmployeeInformation({ name: "Surya", startDate: new Date() });
-var Car = /** @class */ (function () {
-    function Car() {
-    }
-    Car.prototype.drive = function () {
+// printEmployeeInformation({ name: "Surya", startDate: new Date() });
+class Car {
+    drive() {
         console.log("Driving....");
-    };
-    return Car;
-}());
-var Truck = /** @class */ (function () {
-    function Truck() {
     }
-    Truck.prototype.drive = function () {
+}
+class Truck {
+    drive() {
         console.log("Driving...");
-    };
-    Truck.prototype.loadCargo = function (amount) {
+    }
+    loadCargo(amount) {
         console.log("Loading cargo ..." + amount);
-    };
-    return Truck;
-}());
-var v1 = new Car();
-var v2 = new Truck();
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
 function useVhecle(vehicles) {
     vehicles.drive();
     // if ("loadCargo" in vehicles) {
@@ -53,7 +60,7 @@ function useVhecle(vehicles) {
 }
 useVhecle(v1);
 function moveAnimal(animal) {
-    var speed;
+    let speed;
     switch (animal.type) {
         case "bird":
             speed = animal.flyingSpeed;
@@ -66,8 +73,12 @@ function moveAnimal(animal) {
     console.log(" Moving at speed: " + speed);
 }
 moveAnimal({ type: "bird", flyingSpeed: 10 });
-var paragraph = document.getElementById("message-output");
-console.log(paragraph);
-var userInput = document.getElementById("user-input"); // panggunaan ! untuk meyakinkan typescript bahwa ini tidak mungkin null
-userInput.value = "This is not true";
+const userInput = document.getElementById("user"); // panggunaan ! untuk meyakinkan typescript bahwa ini tidak mungkin null
+if (userInput) {
+    userInput.value = "HI there";
+}
 console.log(userInput);
+const error = {
+    email: "Not a valid email !",
+    username: "Must start with a capital character!",
+};

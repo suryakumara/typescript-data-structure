@@ -23,12 +23,35 @@ type Numeric = number | boolean;
 
 type Unversal = Combinable & Numeric;
 
+function tambah(a: number, b: number): number;
+function tambah(a: string, b: string): string;
+function tambah(a: string, b: number): string;
+function tambah(a: number, b: string): string;
+
 function tambah(a: Combinable, b: Combinable) {
   if (typeof a === "string" || typeof b === "string") {
     return a.toString() + b.toString();
   }
   return a + b;
 }
+
+const result = tambah("Surya", "Kumara");
+result.split(" ");
+
+// optional Chaining
+const fetchedUserData = {
+  id: "u1",
+  name: "Max",
+  job: { title: "CEO", description: "My Own Company" },
+};
+
+console.log(fetchedUserData?.job?.title);
+
+const usersInput = "Surya";
+
+const storedData = usersInput ?? "DEFAULT";
+
+console.log(storedData);
 
 type UnknownEmployee = Employee | Admin;
 
@@ -44,7 +67,7 @@ function printEmployeeInformation(emp: UnknownEmployee) {
   }
 }
 
-printEmployeeInformation({ name: "Surya", startDate: new Date() });
+// printEmployeeInformation({ name: "Surya", startDate: new Date() });
 
 class Car {
   drive() {
@@ -111,10 +134,21 @@ function moveAnimal(animal: Animal) {
 
 moveAnimal({ type: "bird", flyingSpeed: 10 });
 
-const paragraph = document.getElementById("message-output");
-console.log(paragraph);
-
-const userInput = document.getElementById("user-input")! as HTMLInputElement; // panggunaan ! untuk meyakinkan typescript bahwa ini tidak mungkin null
-userInput.value = "This is not true";
+const userInput = document.getElementById("user") as HTMLInputElement; // panggunaan ! untuk meyakinkan typescript bahwa ini tidak mungkin null
+if (userInput) {
+  (userInput as HTMLInputElement).value = "HI there";
+}
 
 console.log(userInput);
+
+// index property
+// not limit the property we need
+interface ErrorContainer {
+  // email not a valid email,
+  [prop: string]: string;
+}
+
+const error: ErrorContainer = {
+  email: "Not a valid email !",
+  username: "Must start with a capital character!",
+};
