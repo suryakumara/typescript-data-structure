@@ -71,3 +71,35 @@ const numberStorage = new DataStorage<number>();
 
 const objectStorage = new DataStorage<object>();
 objectStorage.addItem({ name: "Surya" });
+
+//
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+
+  return courseGoal as CourseGoal;
+}
+
+// Readonly types
+const namesE: Readonly<string[]> = ["Max", "Anna"];
+namesE.push("Manu");
+
+// perbedaan union dan generic adalah jika menggunakan generics kita bisa memilih
+// salah satu jenis type yang ada untuk dimaasukkan ke dalam kelas
+// sedangakan jika hanya menggunakan union type, maka setiap dipanggil methodnya boleh dan bebas memasukkan type.
+
+// addItem(item: string[] | number[] | boolean[]) {
+//   this.data.push(item);
+// }
