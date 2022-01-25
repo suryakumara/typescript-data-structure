@@ -1,105 +1,28 @@
-const names: Array<string> = ["Surya", "Kumara"];
-const newName = names[0].split("  ");
-console.log(newName);
-
-const promise: Promise<string> = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("This is done !");
-  }, 2000);
-});
-
-promise.then((data) => console.log(data.split(" ")));
-
-// use extends to constrains the type
-function merge<T extends object, U extends object>(objA: T, objB: U) {
-  return Object.assign(objA, objB);
+function Logger(logString: string) {
+  return function (constructor: Function) {
+    console.log("Loogin...");
+    console.log(constructor);
+  };
 }
 
-const mergedObj = merge({ name: "I Made Surya Kumara" }, { age: 30 });
-
-console.log(mergedObj.age);
-
-interface Lengthy {
-  length: number;
+function WithTemplate(template: string, hookId: string) {
+  return function (constructor: Function) {
+    const hookEl = document.getElementById(hookId);
+    console.log(hookEl);
+    if (hookEl) {
+      hookEl.innerHTML = template;
+    }
+  };
 }
 
-const countAndDescribe = <T extends Lengthy>(element: T) => {
-  let descriptionText = "Got no value";
-  if (element.length === 1) {
-    descriptionText = "Got 1 element.";
-  } else if (element.length > 1) {
-    descriptionText = "Got " + element.length + " element.";
-  }
-  return [element, descriptionText];
-};
+@WithTemplate("<h1>My Template</h1>", "app")
+class Person {
+  name = "Max";
 
-console.log(countAndDescribe([0, 0, 0]));
-
-function extractAndConvert<T extends object, U extends keyof T>(
-  obj: T,
-  key: U
-) {
-  return "Value " + obj[key];
-}
-
-extractAndConvert({ name: "Surya" }, "name");
-
-class DataStorage<T> {
-  private data: T[] = [];
-
-  addItem(item: T) {
-    this.data.push(item);
-  }
-
-  removeItem(item: T) {
-    this.data.splice(this.data.indexOf(item), 1);
-  }
-
-  getItems() {
-    return [...this.data];
+  constructor() {
+    console.log("Creating person object...");
   }
 }
 
-const textStorage = new DataStorage();
-textStorage.addItem("Surya");
-textStorage.addItem("Kumara");
-textStorage.removeItem("Surya");
-console.log(textStorage.getItems());
-
-// alasan menggunakan storage, kita bisa hanya menambahkan number dsana rg.
-const numberStorage = new DataStorage<number>();
-
-const objectStorage = new DataStorage<object>();
-objectStorage.addItem({ name: "Surya" });
-
-//
-interface CourseGoal {
-  title: string;
-  description: string;
-  completeUntil: Date;
-}
-
-function createCourseGoal(
-  title: string,
-  description: string,
-  date: Date
-): CourseGoal {
-  let courseGoal: Partial<CourseGoal> = {};
-  courseGoal.title = title;
-  courseGoal.description = description;
-  courseGoal.completeUntil = date;
-
-  return courseGoal as CourseGoal;
-}
-
-// Readonly types
-const namesE: Readonly<string[]> = ["Max", "Anna"];
-namesE.push("Manu");
-
-// perbedaan union dan generic adalah jika menggunakan generics kita bisa memilih
-// salah satu jenis type yang ada untuk dimaasukkan ke dalam kelas
-// sedangakan jika hanya menggunakan union type, maka setiap dipanggil methodnya boleh dan bebas memasukkan type.
-
-// addItem(item: string[] | number[] | boolean[]) {
-//   this.data.push(item);
-// }
+const pers = new Person();
+console.log(pers);
